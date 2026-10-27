@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sweet Legitz - Company Profile</title>
+<link rel="icon" type="image/png" href="images/logo sweetlegitz.png">
+ <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+
+  
+<header>
+    <div class="container navbar">
+        <div class="logo">
+            <img src="images/logo sweetlegitz.png" alt="Logo Sweet Legitz">
+            <h1>Sweet Legitz</h1>
+        </div>
+
+        <button id="menu-btn" class="menu-btn">☰</button>
+
+        <nav id="nav-menu" class="nav-menu">
+            <a href="#home">Beranda</a>
+            <a href="#about">Tentang Kami</a>
+            <a href="#services">Varian</a>
+            <a href="#team">Keunggulan</a>
+            <a href="#contact">Pesan Sekarang</a>
+        </nav>
+    </div>
+</header>
+
+
+
+
+  <section id="home" class="hero">
+    <img src="images/banner1.png" class="banner aktif" alt="Banner Sweet Legitz">
+
+    <img src="images/banner2.png" class="banner" alt="Banner Sweet Legitz 2">
+
+    <img src="images/banner3.png" class="banner" alt="Banner Sweet Legitz 3">
+  </section>
+
+
+  <section id="about" class="section">
+    <div class="container">
+      <h2 class="section-title">Tentang Kami</h2>
+      <p>
+        Sweet Legitz adalah usaha yang menghadirkan Bika Ambon khas Ambon dengan
+        cita rasa autentik, tekstur lembut, dan kualitas terbaik. Kami menggunakan
+        bahan-bahan pilihan serta proses pembuatan yang higienis untuk menghasilkan
+        Bika Ambon yang lezat dan istimewa. Dengan semangat untuk mempertahankan
+        cita rasa tradisional, Sweet Legitz hadir untuk memberikan pengalaman
+        menikmati Bika Ambon yang selalu bikin kangen.
+      </p>
+    </div>
+  </section>
+
+
+  <section id="services" class="section section-yellow">
+    <div class="container">
+      <h2 class="section-title">Varian Bika Ambon</h2>
+
+
+      <div class="card-container">
+        <div class="card">
+          <h3>Bika Ambon Original</h3>
+          <p>Bika Ambon klasik dengan rasa autentik, tekstur lembut, dan aroma khas yang menggugah selera.</p>
+        </div>
+        <div class="card">
+          <h3>Bika Ambon Pandan</h3>
+          <p>Perpaduan tekstur lembut dengan aroma pandan yang harum dan rasa yang istimewa.</p>
+        </div>
+        <div class="card">
+          <h3>Bika Ambon Keju</h3>
+          <p>Bika Ambon lembut dengan perpaduan rasa gurih keju yang cocok untuk pecinta rasa unik.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section id="team" class="section">
+    <div class="container">
+      <h2 class="section-title">Kelezatan dalam Setiap Gigitan</h2>
+
+      <div class="card-container">
+        <div class="card team-card">
+
+          <div class="avatar">
+            <img src="images/gambar1.png" alt="Rasa Autentik">
+          </div>
+          <h3>Rasa Autentik</h3>
+          <p>Menghadirkan cita rasa khas dengan tekstur lembut dan berserat.</p>
+        </div>
+        <div class="card team-card">
+          <div class="avatar">
+            <img src="images/gambar2.png" alt="Rasa Autentik">
+          </div>
+          <h3>Bahan Berkualitas</h3>
+          <p>Menggunakan bahan pilihan untuk menjaga kualitas setiap produk.</p>
+        </div>
+        <div class="card team-card">
+          <div class="avatar">
+            <img src="images/gambar3.png" alt="Rasa Autentik">
+          </div>
+          <h3>Dibuat dengan Hati</h3>
+          <p>Diproses dengan perhatian untuk menghadirkan rasa yang istimewa.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section id="contact" class="section section-gray">
+    <div class="container">
+      <h2 class="section-title">Yuk, Pesan Sekarang!</h2>
+
+      <!-- Form kontak sederhana -->
+      <form id="contact-form">
+        <label for="name">Nama</label>
+        <input type="text" id="name" placeholder="Masukkan nama Anda" required>
+
+        <label for="alamat">Alamat</label>
+        <textarea id="alamat" rows="3" placeholder="Masukkan alamat pengiriman" required></textarea>
+
+        <label for="message">Pesanan</label>
+        <textarea id="message" rows="4" placeholder="Contoh: Bika Ambon Original 2 kotak" required></textarea>
+
+        <button type="submit" class="btn">Pesan Sekarang</button>
+      </form>
+
+
+
+      <p id="form-status"></p>
+    </div>
+  </section>
+
+
+
+  <a href="#home" class="tombol-atas">⌃</a>
+  <footer class="footer">
+    <p>&copy; <span id="year"></span> Sweet Legitz. Semua hak cipta dilindungi.</p>
+    <p>
+      Dibuat oleh
+      <span class="nama">Farras al abiy</span>,
+      menggunakan HTML, CSS, dan JavaScript.
+    </p>
+  </footer>
+
+
+
+
+  <script src="script.js"></script>
+
+</body>
+
+</html>
