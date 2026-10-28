@@ -1,105 +1,126 @@
-// ================================================
-// BAGIAN 0: TAHUN OTOMATIS DI FOOTER
-// ================================================
 
-// new Date().getFullYear() artinya "ambil tahun sekarang dari komputer/HP pengunjung"
-// misal sekarang 2026, maka nilainya = 2026
-// textContent = ... artinya "tulis angka itu ke dalam elemen HTML ber-id 'year'"
-// Jadi teks "© 2026 Sweet Legitz" di footer akan otomatis update sendiri tiap tahun,
-// tanpa perlu kamu edit manual setiap kali tahun berganti
-document.getElementById('year').textContent = new Date().getFullYear();
+/* TAHUN OTOMATIS DI FOOTER */
+const yearElement = document.getElementById("year");
 
+if (yearElement) {
+  yearElement.textContent = new Date().getFullYear();
+}
 
-// ================================================
-// BAGIAN 1: MENU HAMBURGER (tombol ☰ khusus tampilan HP)
-// ================================================
+/* MENU HAMBURGER */
+const menuBtn = document.getElementById("menu-btn");
+const navMenu = document.getElementById("nav-menu");
 
-// Langkah 1: ambil elemen HTML yang kita butuhkan, simpan ke variabel
-// document.getElementById("xxx") artinya "cari elemen HTML yang id-nya xxx"
-const menuBtn = document.getElementById("menu-btn"); // tombol ☰
-const navMenu = document.getElementById("nav-menu"); // daftar menu (Beranda, Tentang Kami, dst)
-
-// Langkah 2: pasang "pendengar klik" pada tombol menu
-// Artinya: "kalau tombol ini diklik, jalankan kode di dalam kurung kurawal { }"
-menuBtn.addEventListener("click", function () {
-
-  // classList.toggle("active") artinya:
-  // - kalau menu belum kelihatan (belum punya class "active") -> tampilkan
-  // - kalau menu sudah kelihatan (sudah punya class "active")  -> sembunyikan
-  navMenu.classList.toggle("active");
-
-});
-
-
-// Langkah 3: tutup menu otomatis saat salah satu link menu diklik
-// (supaya nyaman dipakai di HP, menu tidak perlu ditutup manual)
-
-// querySelectorAll(".nav-menu a") artinya:
-// "ambil SEMUA tag <a> yang ada di dalam elemen class nav-menu"
-// hasilnya berupa daftar/list berisi 5 link (Beranda, Tentang Kami, dst)
-const navLinks = document.querySelectorAll(".nav-menu a");
-
-// Karena hasilnya berupa DAFTAR (bukan satu elemen saja),
-// kita perlu ulangi kode di bawah untuk SETIAP link satu per satu.
-// forEach artinya "lakukan hal berikut untuk setiap item dalam daftar"
-navLinks.forEach(function (satuLink) {
-
-  // pasang juga "pendengar klik" di setiap link menu
-  satuLink.addEventListener("click", function () {
-
-    // classList.remove("active") artinya: hapus class "active"
-    // jadi menu langsung tertutup lagi setelah link diklik
-    navMenu.classList.remove("active");
-
+if (menuBtn && navMenu) {
+  menuBtn.addEventListener("click", function () {
+    const isOpen = navMenu.classList.toggle("active");
+    menuBtn.setAttribute("aria-expanded", String(isOpen));
   });
 
+  // Tutup menu setelah salah satu link dipilih
+  navMenu.querySelectorAll("a").forEach(function (link) {
+    link.addEventListener("click", function () {
+      navMenu.classList.remove("active");
+      menuBtn.setAttribute("aria-expanded", "false");
+    });
+  });
+}
+
+/* CAROUSEL BANNER */
+const slides = [
+  "images/banner1.png",
+  "images/banner2.png",
+  "images/banner3.png"
+];
+
+const heroImage = document.getElementById("hero-image");
+const dots = document.querySelectorAll(".hero-dot");
+let currentSlide = 0;
+let slideTimer;
+
+function showSlide(index) {
+  if (!heroImage || dots.length === 0) return;
+
+  currentSlide = index;
+  heroImage.src = slides[currentSlide];
+  heroImage.alt = "Banner Sweet Legitz " + (currentSlide + 1);
+
+  dots.forEach(function (dot, dotIndex) {
+    dot.classList.toggle("active", dotIndex === currentSlide);
+  });
+}
+
+function startCarousel() {
+  clearInterval(slideTimer);
+
+  if (heroImage && dots.length > 0) {
+    slideTimer = setInterval(function () {
+      showSlide((currentSlide + 1) % slides.length);
+    }, 5000);
+  }
+}
+
+dots.forEach(function (dot) {
+  dot.addEventListener("click", function () {
+    showSlide(Number(dot.dataset.slide));
+    startCarousel();
+  });
 });
 
+startCarousel();
 
+/* PILIH VARIAN DARI KARTU PRODUK */
+const productLinks = document.querySelectorAll("[data-product]");
+const messageInput = document.getElementById("message");
 
+productLinks.forEach(function (link) {
+  link.addEventListener("click", function () {
+    if (messageInput) {
+      messageInput.value = link.dataset.product + " - ";
+    }
+  });
+});
+
+/* FORM PEMESANAN WHATSAPP */
 const contactForm = document.getElementById("contact-form");
 const formStatus = document.getElementById("form-status");
 
-// Nomor WhatsApp pemilik Sweet Legitz
+// GANTI NOMOR INI DENGAN NOMOR WHATSAPP TOKO YANG BENAR.
+// Gunakan kode negara 62 tanpa tanda +, spasi, atau angka 0 di depan.
 const nomorWhatsAppToko = "6282230744667";
 
-contactForm.addEventListener("submit", function (event) {
-  event.preventDefault();
+if (contactForm) {
+  contactForm.addEventListener("submit", function (event) {
+    event.preventDefault();
 
-  const name = document.getElementById("name").value.trim();
-  const alamat = document.getElementById("alamat").value.trim();
-  const message = document.getElementById("message").value.trim();
+    const name = document.getElementById("name").value.trim();
+    const alamat = document.getElementById("alamat").value.trim();
+    const message = document.getElementById("message").value.trim();
 
-  if (!name || !alamat || !message) {
-    formStatus.style.color = "green";
-    formStatus.textContent = "Mohon lengkapi semua data.";
-    return;
-  }
+    if (!name || !alamat || !message) {
+      formStatus.textContent = "Mohon lengkapi semua data terlebih dahulu.";
+      return;
+    }
 
-  const teksPesan =
-    "Halo Sweet Legitz, saya ingin memesan Bika Ambon.\n\n" +
-    "Nama: " + name + "\n" +
-    "Alamat Pengiriman: " + alamat + "\n" +
-    "Pesanan: " + message;
+    if (!/^\d{10,15}$/.test(nomorWhatsAppToko)) {
+      formStatus.textContent =
+        "Nomor WhatsApp toko belum benar. Silakan periksa kode di script.js.";
+      return;
+    }
 
-  const linkWhatsApp =
-    "https://wa.me/" + nomorWhatsAppToko +
-    "?text=" + encodeURIComponent(teksPesan);
+    const teksPesan =
+      "Halo Sweet Legitz, saya ingin memesan Bika Ambon.\n\n" +
+      "Nama: " + name + "\n" +
+      "Alamat: " + alamat + "\n" +
+      "Pesanan: " + message;
 
-  window.open(linkWhatsApp, "_blank");
+    const linkWhatsApp =
+      "https://wa.me/" +
+      nomorWhatsAppToko +
+      "?text=" +
+      encodeURIComponent(teksPesan);
 
-  formStatus.style.color = "green";
-  formStatus.textContent = "Pemesanan akan langsung diarahkan ke WA CS Sweet Legitz.";
-});
-
-
-const banner = document.querySelectorAll(".banner");
-let index = 0;
-
-setInterval(function () {
-    banner[index].classList.remove("aktif");
-
-    index = (index + 1) % banner.length;
-
-    banner[index].classList.add("aktif");
-}, 3000);
+    window.open(linkWhatsApp, "_blank");
+    formStatus.textContent =
+      "Silakan lanjutkan dan kirim pesanan melalui WhatsApp.";
+  });
+}
